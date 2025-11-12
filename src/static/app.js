@@ -43,8 +43,39 @@ document.addEventListener("DOMContentLoaded", () => {
           details.participants.forEach((participant) => {
             const li = document.createElement("li");
             li.className = "participant-pill";
-            // Use textContent to avoid injecting HTML
-            li.textContent = participant;
+            // Container for participant email and delete icon
+            const span = document.createElement("span");
+            span.textContent = participant;
+            li.appendChild(span);
+
+            // Delete icon
+            const deleteIcon = document.createElement("span");
+            deleteIcon.className = "delete-icon";
+            deleteIcon.title = "Remove participant";
+            deleteIcon.innerHTML = "&#128465;"; // Unicode trash can
+            deleteIcon.style.cursor = "pointer";
+            deleteIcon.style.marginLeft = "8px";
+            deleteIcon.onclick = async (e) => {
+              e.stopPropagation();
+              if (confirm(`Remove ${participant} from ${name}?`)) {
+                try {
+                  const response = await fetch(`/activities/${encodeURIComponent(name)}/unregister`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: participant })
+                  });
+                  const result = await response.json();
+                  if (response.ok) {
+                    fetchActivities();
+                  } else {
+                    alert(result.detail || "Failed to remove participant.");
+                  }
+                } catch (err) {
+                  alert("Error removing participant.");
+                }
+              }
+            };
+            li.appendChild(deleteIcon);
             ul.appendChild(li);
           });
 
