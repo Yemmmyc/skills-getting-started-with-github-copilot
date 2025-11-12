@@ -63,6 +63,8 @@ section h3 {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
+  max-height: 420px;
+  overflow: auto;
 }
 
 .activity-card h4 {
@@ -141,4 +143,58 @@ footer {
   margin-top: 30px;
   padding: 20px;
   color: #666;
+}
+
+.participants-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #eee;
+}
+
+.participants-section h5 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.participants-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.participant-pill {
+  display: inline-block;
+  background: linear-gradient(180deg, #fff, #f1f5ff);
+  border: 1px solid #dfe7ff;
+  color: #1a237e;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.delete-icon {
+  color: #c62828;
+  font-size: 15px;
+  margin-left: 6px;
+  transition: color 0.2s;
+}
+.delete-icon:hover {
+  color: #b71c1c;
+}
+
+.no-participants {
+  margin: 0;
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
 }
